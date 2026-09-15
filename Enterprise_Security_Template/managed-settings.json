@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env*)",
+      "Read(./**/.env*)",
+      "Read(./**/secrets/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/gcloud/**)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Bash(rm -rf:*)",
+      "Bash(rm -r:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
+      "Bash(chmod +x:*)",
+      "Bash(eval:*)",
+      "Bash(exec:*)",
+      "Bash(npx -y:*)",
+      "Bash(pip install:*)"
+    ],
+    "allow": [
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git status:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npx tsc:*)",
+      "Read(./packages/**)",
+      "Read(./src/**)",
+      "Read(./tests/**)",
+      "Read(./CLAUDE.md)",
+      "Read(./.claude/**)",
+      "Read(./package.json)",
+      "Read(./tsconfig*.json)"
+    ]
+  },
+  "enableAllProjectMcpServers": false,
+  "allowedMcpServers": [],
+  "deniedMcpServers": []
+}

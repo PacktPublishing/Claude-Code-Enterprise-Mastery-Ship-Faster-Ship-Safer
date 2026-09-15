@@ -1,0 +1,67 @@
+{
+  "_comment": "Hook Configuration Examples for Claude Code Enterprise",
+  "_usage": "Copy the relevant hook sections into your .claude/settings.json",
+
+  "hooks_examples": {
+
+    "test_on_save": {
+      "_description": "Run tests automatically after every file edit",
+      "PostToolUse": [
+        {
+          "matcher": "Edit|Write|MultiEdit",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "npm test 2>&1 | tail -10"
+            }
+          ]
+        }
+      ]
+    },
+
+    "lint_before_commit": {
+      "_description": "Run linter before any git commit",
+      "PreToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -q 'git commit'; then npm run lint 2>&1 | tail -5; fi"
+            }
+          ]
+        }
+      ]
+    },
+
+    "desktop_notification": {
+      "_description": "macOS notification when Claude finishes or needs input",
+      "Notification": [
+        {
+          "matcher": "",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'"
+            }
+          ]
+        }
+      ]
+    },
+
+    "block_dangerous_commands": {
+      "_description": "Block specific dangerous commands at the hook level",
+      "PreToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'DROP TABLE|TRUNCATE|DELETE FROM.*WHERE 1'; then echo 'BLOCKED: Destructive database operation detected' >&2; exit 1; fi"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
